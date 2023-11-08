@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+    img {
+        /* width: 100%; */
+        object-fit: cover;
+    }
+}
+
+
+@layer components {
+    main {
+        @apply pb-10 space-y-10 min-h-[70vh];
+    }
+
+    .link-primary {
+        @apply transition-all duration-200 hover:text-primary-500;
+    }
+}
+
+.list-outlined-disc {
+    --dot-color: #000;
+    list-style: none;
+    padding-inline-start: 0.5rem;
+}
+
+.list-outlined-disc li::before {
+    content: "";
+    display: inline-block;
+    width: 0.5rem;
+    height: 0.5rem;
+    border: 2px solid var(--dot-color);
+    border-radius: 50%;
+    margin-inline-end: 0.5rem;
+}

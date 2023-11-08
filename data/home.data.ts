@@ -1,0 +1,58 @@
+import CardImg from "@/public/ads/1687214276_32-258x194-product_list.jpg";
+
+export const ad_cards_data = [
+    {
+        id: "01",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+    {
+        id: "02",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+    {
+        id: "03",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+    {
+        id: "04",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+    {
+        id: "05",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+    {
+        id: "06",
+        name: "porsche cayenne coupe gts",
+        photo_url: CardImg,
+        price: 10000000,
+        province: "Cairo",
+        country: "Egypt",
+        duration_in_months: "2 months",
+    },
+];
