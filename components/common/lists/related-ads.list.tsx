@@ -22,7 +22,7 @@ export function RelatedAdsList({items, with_empty_message = false, locale, t}: R
             {with_empty_message && items.length === 0 ? (
                 <NoAdsFound locale={locale}/>
             ) : (
-                <Box component="div" className="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4">
+                <Box component="div" className="grid lg:grid-cols-3 grid-cols-2 gap-4">
                     {items.map((e) => {
                         return (
                             <AdCard

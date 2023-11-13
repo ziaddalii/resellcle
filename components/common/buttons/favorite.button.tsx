@@ -13,6 +13,7 @@ import {UpdateFavoritesModel} from "@/api/interfaces.api";
 import {sleep} from "@/util/formatting.util";
 import {is_authenticated} from "@/api/cookies.api";
 import LoadingButton from "@mui/lab/LoadingButton";
+import { useRouter } from "next-intl/client";
 
 interface Props extends GlobalInterface {
     alt?: boolean;
@@ -26,7 +27,7 @@ export default function FavoriteButton({ alt = false, ad_id, locale }: Props) {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
     const t = useTranslations();
-
+    const navigate = useRouter();
     useEffect(() => {
         const local_favorites_list = JSON.parse(
             localStorage.getItem("favorites") ?? "[]"
@@ -42,6 +43,7 @@ export default function FavoriteButton({ alt = false, ad_id, locale }: Props) {
     const update_favorites = async () => {
         // VALIDATE TOKEN EXISTS
         if (!is_authenticated()) {
+            navigate.push("/auth/login");
             return;
         }
 

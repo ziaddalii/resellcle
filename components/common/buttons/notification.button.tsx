@@ -29,7 +29,7 @@ export default function NotificationButton() {
 
     return (
         <Button
-            // disabled={is_disabled}
+            disabled={is_disabled}
             component={"a"}
             href="/auth/account/notifications"
             color="primary"

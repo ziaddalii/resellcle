@@ -1,34 +1,35 @@
 // noinspection TypeScriptValidateTypes
 
-import { Box, Button, CardActionArea, Chip, Container, Grid } from "@mui/material";
+import {Box, Button, CardActionArea, Chip, Container, Grid} from "@mui/material";
 import ImagesCarousel from "@/components/common/carousels/images.carousel";
-import facebook from "@/public/social-media/facebook.png";
-import twitter from "@/public/social-media/twitter.png";
-import whatsapp from "@/public/social-media/whatsapp.png";
 import LabelValueText from "@/components/common/texts/label-value.text";
-import { ReactNode } from "react";
-import { GlobalInterface } from "@/interfaces/global.interface";
-import { AdModel, AdSenseModel, AdsState, Seller } from "@/api/interfaces.api";
-import { format_date, get_ad_state_text } from "@/util/formatting.util";
+import {ReactNode} from "react";
+import {GlobalInterface} from "@/interfaces/global.interface";
+import {AdModel, AdSenseModel, AdsState, Seller} from "@/api/interfaces.api";
+import {format_date, get_ad_state_text} from "@/util/formatting.util";
 import Link from "next/link";
 import Image from "next/image";
 import AdsenseAd from "@/components/common/ads/adsense.ad";
-import { AdsensePositions } from "@/enums/adsense-positions.enum";
-import { CommentsSection } from "./comments.form";
+import {AdsensePositions} from "@/enums/adsense-positions.enum";
+import {CommentsSection} from "./comments.form";
 import AdActionsList from "@/components/common/lists/ad-actions-list";
-import { RelatedAdsList } from "@/components/common/lists/related-ads.list";
+import {RelatedAdsList} from "@/components/common/lists/related-ads.list";
 import DefaultAvatar from "@/public/seller/default_avatar.webp";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import MsgButton from "@/components/common/buttons/message.buttons";
 import WhatsAppIcon from "@mui/icons-material/WhatsApp";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import { cookies } from "next/headers";
+import {cookies} from "next/headers";
+// import SellerCard from "./../../common/cards/seller.card";
+import PhoneNumberButton from "@/components/common/buttons/phone-number.btn";
+
 interface Props extends GlobalInterface {
     images: string[];
     share_link: string;
     seller: Seller;
     ad_id: string;
+    user_id: string;
     country: {
         id: string;
         name: string;
@@ -88,38 +89,36 @@ export interface IconsModel {
     icon: ReactNode;
 }
 
-export default function DetailsMainSection(
-    {
-        t,
-        locale,
-        related_ads,
-        images,
-        share_link,
-        seller,
+export default function DetailsMainSection({
+    t,
+    locale,
+    related_ads,
+    images,
+    share_link,
+    seller,
 
-        ad_id,
-        name,
-        country,
-        province,
-        city,
-        price,
-        state,
-        created_at,
+    ad_id,
+    name,
+    country,
+    province,
+    city,
+    price,
+    state,
+    created_at,
 
-        description,
-        extras,
+    description,
+    extras,
 
-        filters_extras,
+    filters_extras,
 
-        ad_sense_details_bottom,
+    ad_sense_details_bottom,
 
-        comments,
-    }: Props) {
-        const token = cookies().get("token");
+    comments,
+}: Props) {
+    const token = cookies().get("token");
 
     return (
         <Grid item xs={12} md={7} component="section" className="space-y-8">
-
             {/*Carousel Images*/}
             <div className="bg-black">
                 <ImagesCarousel>
@@ -138,7 +137,7 @@ export default function DetailsMainSection(
             </div>
 
             {/*Buttons Section*/}
-            <AdActionsList share_link={share_link} ad_id={ad_id} locale={locale} token={token}/>
+            <AdActionsList share_link={share_link} ad_id={ad_id} locale={locale} token={token} />
 
             {/*Info Section*/}
             <InfoSection
@@ -166,7 +165,8 @@ export default function DetailsMainSection(
 
             {/*Seller Card*/}
             <Container maxWidth="xl" className="md:!hidden !block">
-                <SellerCard seller={seller} ad_id={ad_id} locale={locale} t={t} />
+                <SellerCard seller={seller} ad_id={ad_id} locale={locale} t={t}/>
+                {/* <SellerCard seller={seller} ad_id={ad_id} locale={locale} t={t} /> */}
             </Container>
 
             {/*Adsense Space*/}
@@ -187,7 +187,6 @@ export default function DetailsMainSection(
             <Container maxWidth="xl">
                 <RelatedAdsList locale={locale} t={t} items={related_ads} />
             </Container>
-
         </Grid>
     );
 }
@@ -203,20 +202,19 @@ interface InfoSectionProps extends GlobalInterface {
     created_at: string;
 }
 
-function InfoSection(
-    {
-        locale,
-        t,
-        seller,
-        ad_number,
-        name,
-        country,
-        province,
-        city,
-        price,
-        state,
-        created_at,
-    }: InfoSectionProps) {
+function InfoSection({
+    locale,
+    t,
+    seller,
+    ad_number,
+    name,
+    country,
+    province,
+    city,
+    price,
+    state,
+    created_at,
+}: InfoSectionProps) {
     return (
         <Container maxWidth="xl" component="div" className="!grid lg:grid-cols-2 items-center grid-cols-1">
             {/* <LabelValueText label={`${t!("fields.ad_number")}: `} value={ad_number} /> */}
@@ -356,17 +354,9 @@ export function SellerCard({ seller, ad_id, locale, t, user_id }) {
                         <LocalPhoneIcon fontSize="small"/>
                         {t!("fields.phone")}
                     </Button>
-                    <Button
-                        className="md:!flex justify-center !hidden gap-2"
-                        component={"a"}
-                        href={`tel:${seller.phones[0]}`}
-                        variant="contained"
-                        sx={{ color: "white" }}
-                        fullWidth
-                    >
-                        <LocalPhoneIcon fontSize="small"/>
-                        {seller.phones[0]}
-                    </Button>
+
+                    <PhoneNumberButton phone_number={seller.phones[0]} />
+                    
                     <div className="grid lg:grid-cols-2 grid-cols-1 gap-2">
                         <div className="cols-span-1">
                             <Button className="gap-2 flex" variant="outlined" component="a" fullWidth

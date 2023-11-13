@@ -30,7 +30,7 @@ export default function AdCard({
     locale,
     t,
 }: Props) {
-    const formatted_price = price.toLocaleString("en-US");
+    const formatted_price = price.toLocaleString("en-US"); 
 
     return (
         <Box className="relative">
@@ -46,7 +46,7 @@ export default function AdCard({
                         <Image
                             width={1000}
                             height={1000}
-                            className="object-cover h-full w-full mx-auto"
+                            className="object-contain h-full w-full mx-auto"
                             src={card_url}
                             alt={name ?? names[locale!] ?? `ad-${id}`}
                         />
@@ -61,13 +61,13 @@ export default function AdCard({
                             {t!("fields.price_in_egp")} {formatted_price}
                         </Typography>
                         <Typography component="p" className="!text-sm text-ellipsis whitespace-nowrap overflow-hidden">
-                            {description}
+                            {descriptions[locale!]}
                         </Typography>
                         <Box className="flex justify-between flex-wrap items-center">
                             <Box>
                                 <PlaceIcon fontSize="small" color="primary" />
                                 <Typography component="span" className="!text-sm !text-gray-600">
-                                    {location.province.names[locale]}
+                                    {location.province.names[locale!]}
                                 </Typography>
                             </Box>
                             <Typography component="span" className="!text-xs !text-gray-600">

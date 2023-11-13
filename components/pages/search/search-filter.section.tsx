@@ -19,6 +19,7 @@ import {useRouter} from "next-intl/client";
 import {build_search_payload} from "@/api/util.api";
 import {Controller} from "react-hook-form";
 import SearchIcon from "@mui/icons-material/Search";
+import ResellcleConfig from "@/util/config";
 
 interface Props extends GlobalInterface {
     page: number;
@@ -64,7 +65,7 @@ export default function SearchFilterSection(
     
     const [isLoading, setIsLoading] = useState(true);
     
-    const [provincesData, setProvincesData] = useState<ProvinceData[]>([]);
+    const [provincesData, setProvincesData] = useState<ProvinceData[]>(provinces);
     const [citiesData, setCitiesData] = useState<CityData[]>([]);
     
     // Handling Form
@@ -116,9 +117,11 @@ export default function SearchFilterSection(
             countries.findIndex((e) => e.id === current_country) !== -1
         ) {
             setValue("country", current_country);
-            setProvincesData(
-                provinces.filter((province) => (province.country?.id === current_country)),
-            );
+            if(ResellcleConfig.ENABLE_REGIONS){
+                setProvincesData(
+                    provinces.filter((province) => (province.country?.id === current_country)),
+                );
+            }
         }
         
         // PROVINCE
@@ -150,8 +153,9 @@ export default function SearchFilterSection(
         const filteredProvinces = provinces.filter((province) => {
             return province.country?.id === country;
         });
-        
-        setProvincesData(filteredProvinces);
+        if(ResellcleConfig.ENABLE_REGIONS){
+            setProvincesData(filteredProvinces);
+        }
         
     }, [watch("country")]);
     
@@ -189,22 +193,25 @@ export default function SearchFilterSection(
                 />
                 
                 {/*Country*/}
+                {ResellcleConfig.ENABLE_REGIONS && (
                 <Controller
-                    name="country"
-                    control={control}
-                    render={({field}) => (
-                        <FormSelect<string>
-                            id="country"
-                            field={field}
-                            fullWidth
-                            label={t("fields.region")}
-                            placeholder={t("placeholders.select_region")}
-                            items={countries}
-                            variant="outlined"
-                            disabled={isLoading || countries.length === 0}
-                        />
-                    )}
-                />
+                name="country"
+                control={control}
+                render={({field}) => (
+                    <FormSelect<string>
+                        id="country"
+                        field={field}
+                        fullWidth
+                        label={t("fields.region")}
+                        placeholder={t("placeholders.select_region")}
+                        items={countries}
+                        variant="outlined"
+                        disabled={isLoading || countries.length === 0}
+                    />
+                )}
+            />
+                )}
+
                 
                 {/*Province*/}
                 <Controller

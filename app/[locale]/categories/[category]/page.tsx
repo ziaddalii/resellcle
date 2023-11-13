@@ -66,6 +66,9 @@ interface Props {
         sub_category?: string;
         sort_by?: string;
         per_page?: number;
+        country?: string;
+        province?: string;
+        city?: string;
         filters?: {
             filter: string;
             value: string;
@@ -94,7 +97,7 @@ export default async function CategoryPage(props: Props) {
     
     const {locale, category} = props.params;
     
-    const {page, sort_by, sub_category, ...other_query_filters} = props.searchParams;
+    const {page, sort_by, sub_category, country, province, city, ...other_query_filters} = props.searchParams;
     
     const current_query_items = [];
     for (const k of Object.keys(props.searchParams ?? {})) {
@@ -123,6 +126,9 @@ export default async function CategoryPage(props: Props) {
         parsed_page,
         sort_by as SortingSelector,
         sub_category,
+        country,
+        province,
+        city,
         current_query_filters.map((e) => ({
             filter: e.id,
             value: e.value,
@@ -134,8 +140,7 @@ export default async function CategoryPage(props: Props) {
         notFound();
     }
     
-    //SORTING
-    const sorting_data: FilterData[] = [
+    const category_data = [
         {
             id: "0",
             name: t("placeholders.select_sub_category"),
@@ -146,6 +151,19 @@ export default async function CategoryPage(props: Props) {
                 value: e.id,
             })),
         },
+    ];
+    //SORTING
+    const sorting_data: FilterData[] = [
+        // {
+        //     id: "0",
+        //     name: t("placeholders.select_sub_category"),
+        //     key: "sub_category",
+        //     options_list: response_data.category.sub_categories.map((e) => ({
+        //         id: e.id,
+        //         name: e.names[locale],
+        //         value: e.id,
+        //     })),
+        // },
         {
             id: "1",
             name: t("placeholders.select_sorting"),
@@ -184,17 +202,42 @@ export default async function CategoryPage(props: Props) {
                     tags_body={response_data.ad_sense.category_top.tags.body}
                     photo_url={response_data.ad_sense.category_top.photo_url}
                     width={response_data.ad_sense.category_top.width}
-                    height={response_data.ad_sense.category_top.height} 
+                    height={response_data.ad_sense.category_top.height}
                     id={`adsense-${AdsensePositions.CATEGORY_TOP}`}
                     is_visible={response_data.ad_sense.category_top.is_visible}
                 />
             
             </Container>
-
+            
             {/*Filter Section*/}
             {response_data.category.filters_choices.length > 0 && <FilterSection
                 current_category={category}
                 current_items={current_query_items}
+                sorting_data={sorting_data}
+                category_data={category_data}
+                countries={response_data.locations.countries.map(
+                    (region) => ({
+                        id: region.id,
+                        name: region.names[locale!],
+                        value: region.id,
+                    }),
+                )}
+                provinces={response_data.locations.provinces.map(
+                    (province) => ({
+                        id: province.id,
+                        name: province.names[locale!],
+                        value: province.id,
+                        country: province.country,
+                    }),
+                )}
+                cities={response_data.locations.cities.map(
+                    (city) => ({
+                        id: city.id,
+                        name: city.names[locale!],
+                        value: city.id,
+                        province: city.province,
+                    }),
+                )}
                 items={response_data.category.filters_choices.map((e) => ({
                     id: e.id,
                     name: e.names[locale],
@@ -235,7 +278,6 @@ export default async function CategoryPage(props: Props) {
                     per_page={response_data.ads.per_page}
                     total_count={response_data.ads.total_count}
                 />
-                
                 <AdsenseAd
                     tags_body={response_data.ad_sense.category_bottom.tags.body}
                     photo_url={response_data.ad_sense.category_bottom.photo_url}

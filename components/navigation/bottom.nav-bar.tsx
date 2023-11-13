@@ -146,14 +146,17 @@ export function ItemLink({ link, name, start_icon, with_li = true }: ItemLinkPro
             color="secondary"
             sx={{
                 justifyContent: "center",
+                display: "flex",
+                gap:"4px",
                 width: "100%",
                 textTransform: "capitalize",
                 borderRadius: "0",
                 fontWeight: "normal",
                 padding: "15px 7px",
             }}
-            startIcon={start_icon}
+            // startIcon={start_icon}
         >
+            {start_icon}
             {name}
         </Button>
     );

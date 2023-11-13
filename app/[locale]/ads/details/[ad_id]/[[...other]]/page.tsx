@@ -1,3 +1,5 @@
+// noinspection TypeScriptValidateTypes
+
 import {Box, Container, Grid} from "@mui/material";
 import {Metadata} from "next";
 import {build_meta_data} from "@/app/[locale]/layout";
@@ -10,6 +12,7 @@ import {notFound} from "next/navigation";
 import DetailsMainSection from "@/components/pages/details/main-section";
 import DetailsSideSection from "@/components/pages/details/side-section";
 import {TLocale} from "@/interfaces/global.interface";
+import {cookies} from "next/headers";
 
 export async function generateMetadata({ params: { locale, ad_id, other } }: Props): Promise<Metadata> {
     const t = await getTranslator(locale);
@@ -59,6 +62,7 @@ interface Props {
 
 export default async function AdDetailsPage({ params: { locale, ad_id, other } }: Props) {
     const { ad, related_ads, side_bar, ad_sense } = await get_ad_details(ad_id);
+    const user_id = cookies().get("user_id")?.value ?? "";
 
     //VALIDATE AD EXISTS
     if (!ad.id) {
@@ -91,6 +95,7 @@ export default async function AdDetailsPage({ params: { locale, ad_id, other } }
                 <Grid container component="section" justifyContent="center">
                     {/*Main Section*/}
                     <DetailsMainSection
+                        user_id={user_id}
                         related_ads={related_ads}
                         t={t}
                         locale={locale}

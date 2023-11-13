@@ -11,15 +11,18 @@ interface Props extends GlobalInterface {}
 export const third_parties = [
     {
         img_url: Google,
-        title: "Google",
+        title: "Google", 
+        backgroundColor:"#ea4335",
     },
     {
         img_url: Facebook,
         title: "Facebook",
+        backgroundColor:"#3c5898",
     },
     {
         img_url: Twitter,
         title: "Twitter / X",
+        backgroundColor:"black",
     },
 ];
 
@@ -33,7 +36,7 @@ export function ThirdPartyRegisterSection({t}: Props) {
 
                 <Grid container columnSpacing={4} spacing={2}>
                     {third_parties.map((item, i) => {
-                        return <ThirdPartyButton key={i} img_url={item.img_url} title={item.title}/>;
+                        return <ThirdPartyButton key={i} bg_color={item.backgroundColor} img_url={item.img_url} title={item.title}/>;
                     })}
                 </Grid>
 

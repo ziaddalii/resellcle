@@ -1,5 +1,5 @@
 "use client";
-import {Box, Button, TextField} from "@mui/material";
+import {Box, Button, TextField, ToggleButton, Tooltip} from "@mui/material";
 import {z} from "zod";
 import {useZod} from "@/hooks/zod.hooks";
 import {GlobalInterface} from "@/interfaces/global.interface";
@@ -14,6 +14,7 @@ import {notify} from "@/components/common/notifications/global-snackbar.notifica
 import {scroll_to_top} from "@/components/common/buttons/floating-arrow.button";
 import {set_cookies_after_login} from "@/api/cookies.api";
 import {toLower} from "lodash-es";
+import PhoneIcon from "@mui/icons-material/Phone";
 
 interface Props extends GlobalInterface {}
 
@@ -28,6 +29,7 @@ export default function LoginForm({locale}: Props) {
     
     const t = useTranslations();
     
+    const [toggle_phone, set_toggle_phone] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     
     // Handling Form
@@ -53,10 +55,10 @@ export default function LoginForm({locale}: Props) {
             } else {
                 notify(false, t("fields.operation_completed"));
                 reset();
-    
+                
                 set_cookies_after_login(result.token.accessToken, result.token.expiresAt, result.user.seller.id);
                 localStorage.setItem("favorites", JSON.stringify(result.user.favorites));
-
+                
                 //FULL PAGE RELOAD
                 window.location.replace("/");
             }
@@ -69,25 +71,47 @@ export default function LoginForm({locale}: Props) {
     return (
         <Box className="space-y-8" onSubmit={onSubmit} component="form">
             
-            {/*Email*/}
-            <Controller
-                name="username_or_phone"
-                control={control}
-                render={({field}) => (
-                    <TextField
-                        {...field}
-                        variant="outlined"
-                        fullWidth
-                        id="username_or_phone"
-                        type="text"
-                        label={t("fields.email_phone")}
-                        placeholder={t("placeholders.enter_email_phone")}
-                        error={hasError(errors, "username_or_phone")}
-                        helperText={getError(errors, "username_or_phone")}
-                        disabled={isLoading}
-                    />
-                )}
-            />
+            {/*Email / Phone*/}
+            <Box
+                display="flex"
+                justifyContent="space-between"
+                gap="2"
+                className={`transition-all duration-700 ${toggle_phone ? "bg-primary-500/10" : ""}`}
+            >
+                
+                <Controller
+                    name="username_or_phone"
+                    control={control}
+                    render={({field}) => (
+                        <TextField
+                            {...field}
+                            variant="outlined"
+                            fullWidth
+                            id="username_or_phone"
+                            type="text"
+                            label={t(toggle_phone ? "fields.phone" : "fields.email")}
+                            placeholder={t(toggle_phone ? "placeholders.enter_phone" : "placeholders.enter_email")}
+                            error={hasError(errors, "username_or_phone")}
+                            helperText={getError(errors, "username_or_phone")}
+                            disabled={isLoading}
+                        />
+                    )}
+                />
+                
+                {/*Toggle Phone*/}
+                <Tooltip title={t("placeholders.login_with_phone")}>
+                    <ToggleButton
+                        value="toggle_phone"
+                        color="primary"
+                        selected={toggle_phone}
+                        onChange={() => set_toggle_phone(!toggle_phone)}
+                    >
+                        <PhoneIcon/>
+                    </ToggleButton>
+                </Tooltip>
+            
+            </Box>
+            
             
             <Controller
                 name="password"

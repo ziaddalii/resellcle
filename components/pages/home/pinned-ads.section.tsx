@@ -23,7 +23,7 @@ export default function HomePinnedAdsSection({locale, data, t}: Props) {
                 </Link>
             </Box>
             
-            <Box className="grid lg:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-4">
+            <Box className="grid lg:grid-cols-4 grid-cols-2 gap-4">
                 {data.map((e) => {
                     return (
                         <AdCard

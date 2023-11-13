@@ -1,37 +1,38 @@
 "use client";
-import {Box, Button, Container, TextField} from "@mui/material";
-import {useZod} from "@/hooks/zod.hooks";
-import {z} from "zod";
-import {getError, hasError, minLengthMsg} from "@/components/common/validations/util";
-import {useState} from "react";
-import {toggle_loading} from "@/components/common/notifications/global-progress-bar.notification";
-import {notify} from "@/components/common/notifications/global-snackbar.notification";
-import {post_comment} from "@/api/requests.api";
-import {AdModel, CommentFormModel} from "@/api/interfaces.api";
-import {GlobalInterface} from "@/interfaces/global.interface";
-import {Controller} from "react-hook-form";
+import { Box, Button, Container, TextField } from "@mui/material";
+import { useZod } from "@/hooks/zod.hooks";
+import { z } from "zod";
+import { getError, hasError, minLengthMsg } from "@/components/common/validations/util";
+import { useState } from "react";
+import { toggle_loading } from "@/components/common/notifications/global-progress-bar.notification";
+import { notify } from "@/components/common/notifications/global-snackbar.notification";
+import { post_comment } from "@/api/requests.api";
+import { AdModel, CommentFormModel } from "@/api/interfaces.api";
+import { GlobalInterface } from "@/interfaces/global.interface";
+import { Controller } from "react-hook-form";
 import CommentCard from "@/components/common/cards/comment.card";
-import {useTranslations} from "next-intl";
-import {isString} from "lodash-es";
-import {scroll_to} from "@/components/common/buttons/floating-arrow.button";
-import {sleep} from "@/util/formatting.util";
-import {is_authenticated} from "@/api/cookies.api";
-
+import { useTranslations } from "next-intl";
+import { isString } from "lodash-es";
+import { scroll_to } from "@/components/common/buttons/floating-arrow.button";
+import { sleep } from "@/util/formatting.util";
+import { is_authenticated } from "@/api/cookies.api";
+import { useRouter } from "next-intl/client";
 
 interface CommentsSectionProps extends GlobalInterface {
     ad_id: string;
     comments: AdModel["comments"];
 }
 
-export function CommentsSection({comments, ad_id, locale}: CommentsSectionProps) {
-    
+export function CommentsSection({ comments, ad_id, locale }: CommentsSectionProps) {
+    const navigate = useRouter();
+
     const t = useTranslations();
-    
+
     const [comments_list, set_comments_list] = useState<CommentsSectionProps["comments"]>(comments);
-    
+
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    
-    const {errors, onSubmit, control, reset} = useZod<CommentFormModel>(
+
+    const { errors, onSubmit, control, reset } = useZod<CommentFormModel>(
         {
             comment: z.string().min(3, minLengthMsg(3, "fields.comment", t)),
         },
@@ -39,14 +40,13 @@ export function CommentsSection({comments, ad_id, locale}: CommentsSectionProps)
             comment: "",
         },
         async (validatedData: CommentFormModel) => {
-            
             setIsLoading(true);
             await toggle_loading(true);
-            
+
             const result = await post_comment(validatedData, ad_id, locale!);
-            
+
             if (isString(result)) {
-                notify(true, result);
+                navigate.push("/auth/login");
             } else {
                 reset();
                 notify(false, t("fields.operation_completed"));
@@ -54,18 +54,16 @@ export function CommentsSection({comments, ad_id, locale}: CommentsSectionProps)
                 await sleep(1);
                 scroll_to(`ad-comment-${result[result.length - 1]}`);
             }
-            
+
             setIsLoading(false);
             await toggle_loading(false);
-            
         }
     );
-    
+
     return (
         <Container maxWidth="xl" component="section" className="space-y-2">
-            
             <p className="font-bold text-xl">{`${t!("fields.comments")}: `}</p>
-            
+
             {/*Comments*/}
             {comments_list.map((comment) => {
                 return (
@@ -78,20 +76,18 @@ export function CommentsSection({comments, ad_id, locale}: CommentsSectionProps)
                     />
                 );
             })}
-            
+
             {/*Form*/}
             {/* <CommentsForm locale={locale} ad_id={ad_id}/> */}
-            {
-                is_authenticated &&
+            {is_authenticated && (
                 <Box component="form" className="space-y-2">
-
                     <Controller
                         name="comment"
                         control={control}
-                        render={({field}) => (
+                        render={({ field }) => (
                             <TextField
                                 {...field}
-                                sx={{marginBottom: ".5rem"}}
+                                sx={{ marginBottom: ".5rem" }}
                                 disabled={isLoading}
                                 fullWidth
                                 id="outlined-multiline-flexible"
@@ -111,14 +107,12 @@ export function CommentsSection({comments, ad_id, locale}: CommentsSectionProps)
                         onClick={onSubmit}
                         type="submit"
                         variant="contained"
-                        sx={{color: "white"}}>
+                        sx={{ color: "white" }}
+                    >
                         {t("fields.send")}
                     </Button>
-
                 </Box>
-            }
-        
+            )}
         </Container>
     );
 }
-

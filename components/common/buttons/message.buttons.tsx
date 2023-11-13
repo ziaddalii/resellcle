@@ -21,6 +21,7 @@ import { GlobalInterface } from "@/interfaces/global.interface";
 import EmailIcon from "@mui/icons-material/Email";
 import { isString } from "lodash-es";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
+import {useRouter} from "next-intl/client";
 
 interface Props extends GlobalInterface {
     ad_id: string;
@@ -33,6 +34,8 @@ export const default_chat_form_values = () => {
 };
 
 export default function MsgButton({ locale, ad_id }: Props) {
+    const navigate = useRouter();
+
     const [show, set_show] = useState<boolean>(false);
 
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -59,7 +62,8 @@ export default function MsgButton({ locale, ad_id }: Props) {
             const result = await post_ad_message(validatedData, ad_id, locale!);
 
             if (isString(result)) {
-                notify(true, result);
+                // notify(true, result);
+                navigate.push("/auth/login");
             } else {
                 notify(false, t("fields.operation_completed"));
                 reset();
@@ -81,7 +85,7 @@ export default function MsgButton({ locale, ad_id }: Props) {
             <Dialog open={show} onClose={on_close}>
                 <DialogTitle> {t("messages.send_message")}</DialogTitle>
 
-                <DialogContent sx={{ width: "40rem" }}>
+                <DialogContent>
                     <Controller
                         name="message"
                         control={control}

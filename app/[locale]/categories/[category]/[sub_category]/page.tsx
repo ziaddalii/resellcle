@@ -65,6 +65,9 @@ interface Props {
         page: string;
         sort_by?: string;
         per_page?: number;
+        country?: string;
+        province?: string;
+        city?: string;
         filters?: {
             filter: string;
             value: string;
@@ -86,7 +89,7 @@ export default async function SubCategoryPage(props: Props) {
     
     const {locale, category, sub_category} = props.params;
     
-    const {page, sort_by, ...other_query_filters} = props.searchParams;
+    const {page, sort_by, country, province, city, ...other_query_filters} = props.searchParams;
     
     const current_query_items = [];
     for (const k of Object.keys(props.searchParams ?? {})) {
@@ -115,6 +118,9 @@ export default async function SubCategoryPage(props: Props) {
         parsed_page,
         sort_by as SortingSelector,
         undefined,
+        country,
+        province,
+        city,
         current_query_filters.map((e) => ({
             filter: e.id,
             value: e.value,
@@ -223,6 +229,29 @@ export default async function SubCategoryPage(props: Props) {
                 current_sub_category={sub_category}
                 current_items={current_query_items}
                 items={final_filters_choices}
+                countries={response_data.locations.countries.map(
+                    (region) => ({
+                        id: region.id,
+                        name: region.names[locale!],
+                        value: region.id,
+                    }),
+                )}
+                provinces={response_data.locations.provinces.map(
+                    (province) => ({
+                        id: province.id,
+                        name: province.names[locale!],
+                        value: province.id,
+                        country: province.country,
+                    }),
+                )}
+                cities={response_data.locations.cities.map(
+                    (city) => ({
+                        id: city.id,
+                        name: city.names[locale!],
+                        value: city.id,
+                        province: city.province,
+                    }),
+                )}
                 locale={locale}
             />}
             

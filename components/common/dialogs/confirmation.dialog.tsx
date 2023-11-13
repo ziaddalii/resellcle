@@ -34,7 +34,7 @@ export function ConfirmationDialog({t, show, onConfirm, onClose}: Props) {
             
             <DialogTitle> {t!("fields.confirmation")}</DialogTitle>
             
-            <DialogContent sx={{width: "40rem"}}>
+            <DialogContent>
                 {t!("placeholders.are_you_sure")}
             </DialogContent>
             

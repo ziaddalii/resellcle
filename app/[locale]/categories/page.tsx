@@ -57,11 +57,11 @@ export default async function CategoriesPage({params: {locale}}: Props) {
         <Container component="main" maxWidth="xl">
             
             {/*Categories Cards*/}
-            <Box className="!grid lg:!grid-cols-4 grid-cols-2 gap-2">
+            <Box className="!grid justify-start lg:!grid-cols-4 grid-cols-2 gap-2">
                 {response_data.categories.map((category) => {
                     return (
                         <CategoryCard
-                            key={category.id}
+                            key={category.id} 
                             locale={locale}
                             name={category.names[locale]}
                             photo_url={category.icon_url}

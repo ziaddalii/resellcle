@@ -31,7 +31,7 @@ export default function MobileAppbar({ token }: Props) {
     };
 
     return (
-        <Box className="fixed bottom-0 w-full z-[51] md:hidden border-t-1 border-t">
+        <Box className="fixed bottom-0 w-full z-[100] md:hidden border-t-1 border-t">
             <BottomNavigation
                 showLabels
                 sx={{
@@ -78,6 +78,7 @@ export default function MobileAppbar({ token }: Props) {
                     sx={{
                         color: "white",
                         fontSize: "10px",
+                        fontWeight:"bold",
                         padding: "0",
                         minWidth: "0",
                         "& .MuiBottomNavigationAction-label": {

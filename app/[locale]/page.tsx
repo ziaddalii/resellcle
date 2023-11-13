@@ -37,7 +37,7 @@ export default async function HomePage({ params: { locale } }: Props) {
     const response_data = await get_home();
     const images = response_data.carousel;
     return (
-        <Container component="main" maxWidth="xl">
+        <Container component="main" className="pt-4" maxWidth="xl">
             {/*Top Carousel*/}
             <ImagesCarousel>
                 {images.map((image, i) => {

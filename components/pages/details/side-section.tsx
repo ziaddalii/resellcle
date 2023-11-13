@@ -27,7 +27,7 @@ export default function DetailsSideSection({locale, t, items, ad_sense_side_bar,
                 </div>
                 
                     {/*Ads */}
-                    <Box className="md:space-y-8 grid md:grid-cols-1 sm:grid-cols-2 grid-cols-1 md:gap-0 gap-4 mt-4">
+                    <Box className="md:space-y-8 grid md:grid-cols-1 grid-cols-2 md:gap-0 gap-4 mt-4">
                         {items.map((e) => {
                             return (
                                 <AdCard

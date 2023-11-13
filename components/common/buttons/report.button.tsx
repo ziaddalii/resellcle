@@ -81,7 +81,7 @@ export function ReportButton({locale, ad_id}: Props) {
                 
                 <DialogTitle> {t("fields.report_ad")}</DialogTitle>
                 
-                <DialogContent sx={{width: "40rem"}}>
+                <DialogContent>
                     <Controller
                         name="reason"
                         control={control}
