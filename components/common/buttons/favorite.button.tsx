@@ -27,7 +27,7 @@ export default function FavoriteButton({ alt = false, ad_id, locale }: Props) {
     const [isFavorite, setIsFavorite] = useState<boolean>(false);
 
     const t = useTranslations();
-    const navigate = useRouter();
+const navigate = useRouter();
     useEffect(() => {
         const local_favorites_list = JSON.parse(
             localStorage.getItem("favorites") ?? "[]"

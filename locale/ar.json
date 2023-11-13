@@ -6,7 +6,7 @@
   "top_navbar": {
     "ad": "نشر إعلان مجاني"
   },
-  "notifications":{
+  "notifications": {
     "notifications": "الإشعارات",
     "empty_notifications": "قائمة الإشعارات فارغة"
   },
@@ -36,7 +36,7 @@
   },
   "ads": {
     "empty_ads": "لا يوجد إعلانات",
-    "add_new_ads": "إضافة إعلان جديد",
+    "add_new_ads": "إعلان جديد",
     "edit_ad": "تعديل الإعلان",
     "delete_ads": "حذف الإعلانات",
     "name": "عنوان الإعلان",
@@ -66,7 +66,7 @@
     "seller": "صفحة البائع",
     "sitemap": "خريطة الموقع",
     "terms": "الشروط و الأحكام",
-    "personal_information":  "المعلومات الشخصية"
+    "personal_information": "المعلومات الشخصية"
   },
   "account": {
     "edit_your_account_information": "تعديل معلومات حسابك",
@@ -89,8 +89,8 @@
   },
   "messages": {
     "title": "الرسائل",
-    "inbox":"صندوق الوارد",
-    "select_chat":"اختار محادثة لعرضها",
+    "inbox": "صندوق الوارد",
+    "select_chat": "اختار محادثة لعرضها",
     "empty_messages": "قائمة الرسائل فارغة",
     "send_message": "ارسال رسالة",
     "last_message": "اخر رسالة",
@@ -105,20 +105,20 @@
     "empty_favorites": "قائمة المفضلة فارغة"
   },
   "fields": {
-    "x":"إكس",
-    "content":"المحتوي",
-    "type":"النوع",
-    "twitter":"تويتر",
-    "facebook":"فيسبوك",
-    "whatsapp":"واتساب",
+    "x": "إكس",
+    "content": "المحتوي",
+    "type": "النوع",
+    "twitter": "تويتر",
+    "facebook": "فيسبوك",
+    "whatsapp": "واتساب",
     "messenger": "ماسنجر",
     "filters_extras": "فلاتر اضافية",
-    "ago":"منذ",
-    "from":"من",
-    "with":"مع",
-    "report":"الابلاغ",
+    "ago": "منذ",
+    "from": "من",
+    "with": "مع",
+    "report": "الابلاغ",
     "cancel": "إلغاء",
-    "descriptors":"واصفات",
+    "descriptors": "واصفات",
     "filters_choices": "اختيارات المرشحات",
     "logout": "تسجيل خروج",
     "username": "اسم المستخدم",
@@ -287,6 +287,7 @@
     "are_you_sure": "هل أنت متأكد من تنفيذ العملية ؟",
     "enter_message": "اكتب الرسالة",
     "enter_comment": "اكتب التعليق",
-    "select_descriptors": "اختر الفلاتر النصية"
+    "select_descriptors": "اختر الفلاتر النصية",
+    "login_with_phone": "تسجيل الدخول برقم الهاتف"
   }
 }

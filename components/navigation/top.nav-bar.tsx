@@ -14,7 +14,7 @@ import { cookies } from "next/headers";
 interface Props extends GlobalInterface {}
 
 export default function TopNavBarSection({ t }: Props) {
-    const token = cookies().has("token");
+    const token = cookies().has("token")
     return (
         <section className="bg-secondary-100 p-4 grid grid-cols-12 gap-2 items-center">
             {/*Logo*/}

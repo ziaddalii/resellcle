@@ -20,7 +20,7 @@
   },
   "ads": {
     "empty_ads": "No Ads Found",
-    "add_new_ads": "Add New Ad",
+    "add_new_ads": "New Ad",
     "edit_ad": "Edit Ad",
     "delete_ads": "Delete Ads",
     "name": "Name",
@@ -291,6 +291,7 @@
     "are_you_sure": "Are you sure of this action ?",
     "enter_message": "Enter Message",
     "enter_comment": "Enter Comment",
-    "select_descriptors": "Select Descriptors"
+    "select_descriptors": "Select Descriptors",
+    "login_with_phone": "Login with phone number"
   }
 }
