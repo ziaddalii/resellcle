@@ -25,6 +25,7 @@ export function AdsList({items, with_empty_message = true, locale, t}: AdsListPr
                             <AdCard
                                 key={e.id}
                                 id={e.id}
+                                slug={e.slug}
                                 name={e.names[locale]}
                                 names={e.names}
                                 card_url={e.card_url}

@@ -28,13 +28,14 @@ export default function CategoryCard({ name, photo_url, sub_categories, locale, 
     return (
         <Box className="flex items-center gap-2 justify-start px-4 py-2">
             <DropDownList
+                slug={category.slug}
                 category_name={category.names.en}
                 menu_list={sub_categories.map((item) => {
                     return (
                         <a
                             key={item.id}
-                            href={`/categories/${encodeURIComponent(category.names.en)}/${encodeURIComponent(
-                                item.names.en
+                            href={`/categories/${encodeURIComponent(category.slug)}/${encodeURIComponent(
+                                item.slug
                             )}?page=1`}
                         >
                             <MenuItem>{item.names[locale!]}</MenuItem>

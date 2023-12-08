@@ -57,7 +57,7 @@ export default async function SiteMapPage({params: {locale}}: Props) {
                                 className="col-span-2 space-y-2">
                                 <li>
                                     
-                                    <Link href={`categories/${category.id}`}
+                                    <Link href={`categories/${category.slug}`}
                                           className="font-bold flex items-center gap-2">
                                         <Image
                                             width={60}
@@ -75,7 +75,7 @@ export default async function SiteMapPage({params: {locale}}: Props) {
                                                 <li key={i}>
                                                     <Link
                                                         className="flex flex-wrap items-center gap-2"
-                                                        href={`categories/${category.id}/${subcategory.id}}`}
+                                                        href={`categories/${category.slug}/${subcategory.slug}}`}
                                                     >
                                                         <Image
                                                             className="rounded-full object-cover h-[40px]"

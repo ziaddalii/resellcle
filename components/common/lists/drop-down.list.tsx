@@ -13,9 +13,10 @@ interface Props {
     trigger: ReactNode;
     menu_list: ReactNode;
     category_name: string;
+    slug: string;
 }
 
-export default function DropDownList({ trigger, menu_list, category_name }: Props) {
+export default function DropDownList({ trigger, menu_list, category_name, slug }: Props) {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
     const open = Boolean(anchorEl ?? false);
@@ -40,7 +41,7 @@ export default function DropDownList({ trigger, menu_list, category_name }: Prop
             <Button
                 component={"a"}
                 {...bindHover(popupState)}
-                href={`/categories/${encodeURIComponent(category_name)}?page=1`}
+                href={`/categories/${slug}?page=1`}
                 sx={{
                     display: "absolute",
                     zIndex: 100,

@@ -1,10 +1,10 @@
-import { Box, CardActionArea, Typography } from "@mui/material";
+import {Box, CardActionArea, Typography} from "@mui/material";
 import Image from "next/image";
 import PlaceIcon from "@mui/icons-material/Place";
 import FavoriteButton from "../buttons/favorite.button";
-import { GlobalInterface } from "@/interfaces/global.interface";
-import { format_duration_diff_from_months_to_seconds } from "@/util/formatting.util";
-import { AdModel } from "@/api/interfaces.api";
+import {GlobalInterface} from "@/interfaces/global.interface";
+import {format_duration_diff_from_months_to_seconds} from "@/util/formatting.util";
+import {AdModel} from "@/api/interfaces.api";
 
 interface Props extends GlobalInterface, Omit<AdModel, "filters_extras"> { }
 
@@ -13,6 +13,7 @@ export default function AdCard({
     seller,
     card_url,
     photos,
+    slug,
     name,
     names,
     description,
@@ -38,7 +39,7 @@ export default function AdCard({
 
             <a
                 id={id}
-                href={`/ads/details/${id}/${encodeURIComponent(names.en)}`}
+                href={`/ads/details/${slug}`}
                 className="block mb-4 col-span-1 border-1 border-solid border-gray-200 border items-center relative"
             >
                 <CardActionArea>

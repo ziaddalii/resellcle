@@ -112,7 +112,7 @@ export default function AdsTableList({locale, ads}: TableSectionModel) {
                             
                             <TableCell>
                                 <a
-                                    href={`/ads/details/${e.id}/${encodeURIComponent(e.names.en)}`}
+                                    href={`/ads/details/${e.slug}`}
                                     className="text-blue-400 font-bold"
                                 >
                                     {e.names[locale!]}

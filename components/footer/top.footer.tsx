@@ -1,17 +1,16 @@
-import { Box } from "@mui/material";
+import {Box} from "@mui/material";
 import Link from "next-intl/link";
-import { ReactNode } from "react";
+import {ReactNode} from "react";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import { Category } from "@mui/icons-material";
+import {Category} from "@mui/icons-material";
 import PersonIcon from "@mui/icons-material/Person";
 import EmailIcon from "@mui/icons-material/Email";
 import AddIcon from "@mui/icons-material/Add";
 import AddBusinessIcon from "@mui/icons-material/AddBusiness";
 import SearchIcon from "@mui/icons-material/Search";
 import DomainVerificationIcon from "@mui/icons-material/DomainVerification";
-import { CategoryModel, RegionsModel } from "@/api/interfaces.api";
-import { GlobalInterface } from "@/interfaces/global.interface";
-import Config from "@/util/config";
+import {CategoryModel, RegionsModel} from "@/api/interfaces.api";
+import {GlobalInterface} from "@/interfaces/global.interface";
 import ResellcleConfig from "@/util/config";
 
 interface Props extends GlobalInterface {
@@ -114,10 +113,10 @@ export default async function TopFooterSection({ regions, categories, locale, t 
                     items={categories.map((e: CategoryModel) => ({
                         name: e.names[locale!],
                         link: e.super_category?.id
-                            ? `/categories/${encodeURIComponent(e.super_category.names.en)}/${encodeURIComponent(
-                                  e.names.en
+                            ? `/categories/${encodeURIComponent(e.super_category.slug)}/${encodeURIComponent(
+                                  e.slug
                               )}`
-                            : `/categories/${encodeURIComponent(e.names.en)}`,
+                            : `/categories/${encodeURIComponent(e.slug)}`,
                     }))}
                 />
 

@@ -109,7 +109,7 @@ export default function FavoritesTableList({locale, favorites}: TableSectionMode
                             
                             <TableCell>
                                 <Link
-                                    href={`/ads/details/${e.id}/${encodeURIComponent(e.names.en)}`}
+                                    href={`/ads/details/${e.slug}`}
                                     className="text-blue-400 font-bold">
                                     {e.names[locale!]}
                                 </Link>

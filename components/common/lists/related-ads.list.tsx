@@ -1,5 +1,5 @@
 import AdCard from "@/components/common/cards/ad.card";
-import {Box, Container} from "@mui/material";
+import {Box} from "@mui/material";
 import {NoAdsFound} from "./ads.list";
 import {GlobalInterface} from "@/interfaces/global.interface";
 import {AdModel} from "@/api/interfaces.api";
@@ -28,6 +28,7 @@ export function RelatedAdsList({items, with_empty_message = false, locale, t}: R
                             <AdCard
                                 key={e.id}
                                 id={e.id}
+                                slug={e.slug}
                                 name={e.names[locale]}
                                 names={e.names}
                                 card_url={e.card_url}

@@ -43,14 +43,15 @@ export function BottomNavDesktopSection({ data, locale, t }: Props) {
                 return (
                     <DropDownList
                         key={category.id}
+                        slug={category.slug}
                         trigger={category.names[locale!]}
                         category_name={category.names.en}
                         menu_list={category.sub_categories.map((e) => {
                             return (
                                 <a
                                     key={e.id}
-                                    href={`/categories/${encodeURIComponent(category.names.en)}/${encodeURIComponent(
-                                        e.names.en
+                                    href={`/categories/${encodeURIComponent(category.slug)}/${encodeURIComponent(
+                                        e.slug
                                     )}?page=1`}
                                 >
                                     <MenuItem
@@ -115,7 +116,7 @@ export function BottomNavMobileSection({ data, locale, t }: Props) {
                         return (
                             <ItemLink
                                 key={e.id}
-                                link={`/categories/${encodeURIComponent(e.names.en)}?page=1`}
+                                link={`/categories/${encodeURIComponent(e.slug)}?page=1`}
                                 name={e.names[locale!]}
                             ></ItemLink>
                         );

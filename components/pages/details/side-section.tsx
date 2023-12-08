@@ -33,6 +33,7 @@ export default function DetailsSideSection({locale, t, items, ad_sense_side_bar,
                                 <AdCard
                                     key={e.id}
                                     id={e.id}
+                                    slug={e.slug}
                                     name={e.names[locale]}
                                     names={e.names}
                                     card_url={e.card_url}

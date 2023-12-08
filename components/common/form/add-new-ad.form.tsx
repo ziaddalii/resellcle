@@ -15,26 +15,26 @@ import {
     RadioGroup,
     TextField,
 } from "@mui/material";
-import { useEffect, useState } from "react";
-import { Controller } from "react-hook-form";
-import { useZod } from "@/hooks/zod.hooks";
-import { getError, hasError, minLengthMsg } from "../validations/util";
-import { toggle_loading } from "@/components/common/notifications/global-progress-bar.notification";
-import { notify } from "@/components/common/notifications/global-snackbar.notification";
-import { useTranslations } from "next-intl";
-import { z } from "zod";
-import { GlobalInterface } from "@/interfaces/global.interface";
+import {useEffect, useState} from "react";
+import {Controller} from "react-hook-form";
+import {useZod} from "@/hooks/zod.hooks";
+import {getError, hasError, minLengthMsg} from "../validations/util";
+import {toggle_loading} from "@/components/common/notifications/global-progress-bar.notification";
+import {notify} from "@/components/common/notifications/global-snackbar.notification";
+import {useTranslations} from "next-intl";
+import {z} from "zod";
+import {GlobalInterface} from "@/interfaces/global.interface";
 import SectionLabelText from "@/components/common/texts/section-label.text";
-import { AddNewAdForm, AdModel, LocationModel, ResponseGet } from "@/api/interfaces.api";
-import { FormSelect, SelectModel } from "@/components/common/form/select.form";
-import { CityData, ProvinceData } from "@/app/[locale]/auth/register/page";
-import { zPhoto } from "@/components/common/validations/photo";
+import {AddNewAdForm, AdModel, LocationModel, ResponseGet} from "@/api/interfaces.api";
+import {FormSelect, SelectModel} from "@/components/common/form/select.form";
+import {CityData, ProvinceData} from "@/app/[locale]/auth/register/page";
+import {zPhoto} from "@/components/common/validations/photo";
 import AdImageInput from "@/components/common/inputs/ad-image.inputs";
 import AdMultipleImagesInput from "@/components/common/inputs/ad-multi-images.inputs";
-import { scroll_to_top } from "@/components/common/buttons/floating-arrow.button";
-import { POST_ADS_ADD } from "@/api/constants.api";
-import { getCookie } from "cookies-next";
-import { get_request_errors } from "@/util/formatting.util";
+import {scroll_to_top} from "@/components/common/buttons/floating-arrow.button";
+import {POST_ADS_ADD} from "@/api/constants.api";
+import {getCookie} from "cookies-next";
+import {get_request_errors} from "@/util/formatting.util";
 import ResellcleConfig from "@/util/config";
 
 interface Props extends GlobalInterface {
@@ -139,7 +139,7 @@ const defaultAdValues = () => {
         price: "",
         // seo_tags: "",
 
-        region: "",
+        // region: "",
         province: "",
         city: "",
 
@@ -169,7 +169,7 @@ const AddNewAdForm = ({ locale, categories, descriptors, countries, provinces, c
             price: z.string().min(1, minLengthMsg(1, "fields.price", t)).regex(/^\d+$/),
             // seo_tags: z.optional(z.string()),
 
-            region: z.string().min(1, minLengthMsg(1, "fields.region", t)),
+            // region: z.string().min(1, minLengthMsg(1, "fields.region", t)),
             province: z.string().min(1, minLengthMsg(1, "fields.province", t)),
             city: z.string().min(1, minLengthMsg(1, "fields.city", t)),
 
@@ -196,7 +196,7 @@ const AddNewAdForm = ({ locale, categories, descriptors, countries, provinces, c
                 })
             ),
 
-            filters_extras: z.array(z.string()).min(1, minLengthMsg(1, "fields.filters_extras", t)),
+            filters_extras: z.array(z.string()),//.min(1, minLengthMsg(1, "fields.filters_extras", t)),
 
             descriptors: z.array(
                 z.object({

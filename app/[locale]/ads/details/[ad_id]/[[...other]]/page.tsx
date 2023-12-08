@@ -27,7 +27,7 @@ export async function generateMetadata({ params: { locale, ad_id, other } }: Pro
         openGraph: {
             title: ad.names[locale],
             description: ad.descriptions[locale],
-            url:other && other[0] ? `https://resellcle.com/${locale}/ads/details/${ad_id}/${other[0]}` : `https://resellcle.com/${locale}/ads/details/${ad_id}`,
+            url: `https://resellcle.com/${locale}/ads/details/${ad.slug}`,
             locale,
             images: [
                 {
@@ -75,7 +75,7 @@ export default async function AdDetailsPage({ params: { locale, ad_id, other } }
         <Box component="main">
             {/*Nav Header*/}
             <HeaderNavButtons
-                items={[{ name: ad.names[locale], link: `/ads/details/${ad.id}/${encodeURIComponent(ad.names.en)}` }]}
+                items={[{ name: ad.names[locale], link: `/ads/details/${ad.slug}` }]}
             />
 
             {/*Adsense Space*/}
@@ -100,7 +100,7 @@ export default async function AdDetailsPage({ params: { locale, ad_id, other } }
                         t={t}
                         locale={locale}
                         images={ad.photos}
-                        share_link={other && other[0] ? `https://resellcle.com/${locale}/ads/details/${ad_id}/${other[0]}` : `https://resellcle.com/${locale}/ads/details/${ad_id}`}
+                        share_link={`https://resellcle.com/${locale}/ads/details/${ad.slug}`}
                         seller={ad.seller}
                         ad_id={ad.id}
                         name={ad.names[locale]}

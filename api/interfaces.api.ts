@@ -91,6 +91,7 @@ interface FilterExtraModel {
 
 export interface CategoryModel {
     id: string;
+    slug: string;
     name: string;
     names: {
         en: string;
@@ -179,6 +180,7 @@ export interface AdModel {
     card_url: string;
     photos: string[];
     photos_full?: PhotoFull[];
+    slug: string;
     name: string;
     names: {
         en: string;
@@ -383,6 +385,12 @@ export interface CategoryPage {
         category_top: AdSenseModel;
         category_bottom: AdSenseModel;
         sub_category_top: AdSenseModel;
+    };
+    
+    locations: {
+        countries: CountryModel[];
+        provinces: ProvinceModel[];
+        cities: CityModel[];
     };
 }
 
@@ -589,6 +597,7 @@ export interface SearchDataModel {
 
 export interface FavoritesModel {
     id: string;
+    slug: string;
     names: {
         en: string;
         ar: string;
@@ -996,7 +1005,7 @@ export interface EditAdForm {
     
     photos_add?: File[];
     photos_update?: Photo[];
-    photos_delete?: Photo[];
+    photos_delete?: string[];
     
     
     category?: string;

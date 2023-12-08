@@ -28,6 +28,7 @@ export default function HomePaidAdsSection({locale, data, t}: Props) {
                         <AdCard
                             key={e.id}
                             id={e.id}
+                            slug={e.slug}
                             name={e.names[locale]}
                             names={e.names}
                             card_url={e.card_url}
