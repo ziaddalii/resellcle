@@ -10,14 +10,14 @@ export default async function AuthLayout({children}: { children: ReactNode }) {
     
     // IF LOGGED IN
     if (
-        (active_path.includes("auth/login") || active_path.includes("auth/register")) &&
+        (active_path?.includes("auth/login") || active_path?.includes("auth/register")) &&
         cookies().get("token")?.value
     ) {
         redirect("/");
     }
     
     if (
-        (active_path.includes("account/") && !cookies().get("token")?.value)
+        (active_path?.includes("account/") && !cookies().get("token")?.value)
     ) {
         // notFound(); // OR GO TO LOGIN
         redirect("/auth/login");
